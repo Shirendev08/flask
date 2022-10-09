@@ -1,11 +1,13 @@
-from flask import Flask, escape, request
+from django.shortcuts import render
+from flask import Flask, escape, request, render_template
 
 app = Flask(__name__)
 @app.route('/')
 
 def hello():
-    name = request.args.get("name", "world")
-    return f'Hello, {escape(name)}'
+    
+    return render_template("index.html")
 
-if __name__ == '__main__':
-    app.run()   
+@app.route('/greet')  
+def greet():
+    return render_template("greet.html",name=request.args.get("name"))
